@@ -4,10 +4,11 @@
     padding: 0;
     margin: 0;
     font-family: 'Open Sans', monospace, sans-serif;
+    font-size: 20px;
 }
 
 body {
-
+    background-color: rgb(112, 112, 112);
 }
 
 main {
@@ -19,8 +20,36 @@ footer {
     text-align: center;
 }
 
+button {
+    border-radius: 4px;
+    text-align: center;
+    font-size: 1em;
+    color: white;
+    background-color: rgb(110, 109, 109);
+    border: none;
+    box-shadow: 2px 2px 5px rgb(28, 28, 28);
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+button:hover {
+    transform: scale(0.95);
+    font-size: 1.1em;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+a:hover {
+    font-size: 1.2em;
+    transform: scale(1.2);
+}
+
 #calculator {
-    border: 1px solid red;
+    background-color: rgb(52, 51, 51);
+    border-radius: 10px;
     width: 350px;
     height: 500px;
     padding: 3px;
@@ -28,21 +57,25 @@ footer {
 }
 
 .display {
-    border: 1px solid blue;
-    width: 335px;
+    background-color: rgb(78, 75, 75);
+    box-shadow: inset 2px 2px 2px rgb(28, 28, 28);
+    border-radius: 10px;
+    width: 325px;
     height: 150px;
     margin: 5px auto;
 }
 
 .keyboard {
-    width: 335px;
-    height: 320px;
+    width: 325px;
+    height: 315px;
     margin: 12px auto;
 
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
 }
 
-.digits {
+.equals {
+    grid-column: span 2;
 }
