@@ -11,7 +11,7 @@ let sum = (number1, number2) => number1 + number2,
                 return subtract(number1, number2);
             case 'x':
                 return multiply(number1, number2);
-            case '\\':
+            case "/":
                 return divide(number1, number2);
             case '%':
                 return percent(number1, number2);
@@ -19,6 +19,22 @@ let sum = (number1, number2) => number1 + number2,
                 return null;
         }
     };
+
+function verify(operation, operator) {
+    let position = operation.indexOf(operator),
+        result, number1, number2;
+    while(position != -1) {
+        number1 = Number(operation[position - 1]);
+        number2 = Number(operation[position + 1]);
+        result = operate(operator, number1, number2);
+
+        operation[position - 1] = result;
+        operation.splice(position + 1);
+        operation.splice(position);
+
+        position = operation.indexOf(operator);
+    }
+}
 
 let doOperation = document.querySelector('.equals'),
     digits = document.querySelectorAll('.digit'),
@@ -28,11 +44,11 @@ let doOperation = document.querySelector('.equals'),
 
 let display = document.querySelector('.display'),
     expression = document.querySelector('.expression'),
-    result = document.querySelector('.result'),
-    number1, number2;
+    result = document.querySelector('.result');
 
 allClear.addEventListener('click', () => {
     expression.innerHTML = '';
+    result.innerHTML = '';
 });
 
 clear.addEventListener('click', () => {
@@ -53,3 +69,12 @@ operators.forEach(element => {
         expression.innerHTML += (' ' + element.innerHTML + ' ');
     });
 });
+
+doOperation.addEventListener('click', () => { 
+    let operation = expression.innerHTML.split(' ');
+    verify(operation, "/");
+    verify(operation, 'x');
+    verify(operation, '+');
+    verify(operation, '-');
+    result.innerHTML = operation[0];
+})
