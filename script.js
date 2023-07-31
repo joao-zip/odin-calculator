@@ -11,3 +11,23 @@ let doOperation = document.querySelector('.equals'),
     allClear = document.querySelector('.allclear');
 
 let display = document.querySelector('.display');
+
+allClear.addEventListener('click', () => {
+    display.innerHTML = '';
+});
+
+clear.addEventListener('click', () => {
+    display.innerHTML = display.innerHTML.slice(0, -1);
+});
+
+digits.forEach(element => {
+    element.addEventListener('click', () => {
+        display.innerHTML += element.innerHTML;
+    });
+});
+
+operators.forEach(element => {
+    element.addEventListener('click', () => {
+        display.innerHTML += element.innerHTML;
+    });
+})
