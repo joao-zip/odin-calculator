@@ -76,12 +76,10 @@ a:hover {
 }
 
 .expression {
-    border: 1px solid blue;
     flex: 3;
 }
 
 .result {
-    border: 1px solid red;
     flex: 4;
     font-size: 1.5em;
 }
