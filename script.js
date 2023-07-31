@@ -10,24 +10,26 @@ let doOperation = document.querySelector('.equals'),
     clear = document.querySelector('.clear'),
     allClear = document.querySelector('.allclear');
 
-let display = document.querySelector('.display');
+let display = document.querySelector('.display'),
+    expression = document.querySelector('.expression'),
+    result = document.querySelector('.result');
 
 allClear.addEventListener('click', () => {
-    display.innerHTML = '';
+    expression.innerHTML = '';
 });
 
 clear.addEventListener('click', () => {
-    display.innerHTML = display.innerHTML.slice(0, -1);
+    expression.innerHTML = expression.innerHTML.slice(0, -1);
 });
 
 digits.forEach(element => {
     element.addEventListener('click', () => {
-        display.innerHTML += element.innerHTML;
+        expression.innerHTML += element.innerHTML;
     });
 });
 
 operators.forEach(element => {
     element.addEventListener('click', () => {
-        display.innerHTML += element.innerHTML;
+        expression.innerHTML += element.innerHTML;
     });
-})
+});
