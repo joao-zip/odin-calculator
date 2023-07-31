@@ -11,7 +11,7 @@ let sum = (number1, number2) => number1 + number2,
                 return subtract(number1, number2);
             case 'x':
                 return multiply(number1, number2);
-            case "/":
+            case '/':
                 return divide(number1, number2);
             case '%':
                 return percent(number1, number2);
@@ -29,8 +29,8 @@ function verify(operation, operator) {
         result = operate(operator, number1, number2);
 
         operation[position - 1] = result;
-        operation.splice(position + 1);
-        operation.splice(position);
+        operation.splice(position + 1, 1);
+        operation.splice(position, 1);
 
         position = operation.indexOf(operator);
     }
@@ -72,9 +72,10 @@ operators.forEach(element => {
 
 doOperation.addEventListener('click', () => { 
     let operation = expression.innerHTML.split(' ');
-    verify(operation, "/");
+    verify(operation, '%');
+    verify(operation, '/');
     verify(operation, 'x');
     verify(operation, '+');
     verify(operation, '-');
     result.innerHTML = operation[0];
-})
+});
