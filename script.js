@@ -66,6 +66,8 @@ digits.forEach(element => {
 
 operators.forEach(element => {
     element.addEventListener('click', () => {
+        if(expression.innerHTML.at(-1) == ' ')
+            expression.innerHTML = expression.innerHTML.slice(0, -3);
         expression.innerHTML += (' ' + element.innerHTML + ' ');
     });
 });
