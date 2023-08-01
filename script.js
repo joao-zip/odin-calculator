@@ -54,12 +54,15 @@ let doOperation = document.querySelector('.equals'),
 
 let display = document.querySelector('.display'),
     expression = document.querySelector('.expression'),
-    result = document.querySelector('.result')
-    zeroError = false;
+    result = document.querySelector('.result'),
+    point = document.querySelector('.point'),
+    zeroError = false,
+    clickable = true;
 
 allClear.addEventListener('click', () => {
     expression.innerHTML = '';
     result.innerHTML = '';
+    clickable = true;
 });
 
 clear.addEventListener('click', () => {
@@ -67,6 +70,7 @@ clear.addEventListener('click', () => {
         expression.innerHTML = expression.innerHTML.slice(0, -3);
     else
         expression.innerHTML = expression.innerHTML.slice(0, -1);
+    clickable = true;
 });
 
 digits.forEach(element => {
@@ -75,11 +79,19 @@ digits.forEach(element => {
     });
 });
 
+point.addEventListener('click', () => {
+    if(clickable) {
+        expression.innerHTML += point.innerHTML;
+        clickable = false;
+    }
+})
+
 operators.forEach(element => {
     element.addEventListener('click', () => {
         if(expression.innerHTML.at(-1) == ' ')
             expression.innerHTML = expression.innerHTML.slice(0, -3);
         expression.innerHTML += (' ' + element.innerHTML + ' ');
+        clickable = true;
     });
 });
 
