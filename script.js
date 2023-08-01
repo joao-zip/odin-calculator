@@ -1,7 +1,13 @@
 let sum = (number1, number2) => number1 + number2,
     subtract = (number1, number2) => number1 - number2,
     multiply = (number1, number2) => number1 * number2,
-    divide = (number1, number2) => number1 / number2,
+    divide = (number1, number2) => {
+        if(number2 == 0) {
+            zeroError = true;
+            return null;
+        }
+        return number1 / number2;
+    },
     percent = (percentage, total) => percentage * 0.01 * total,
     operate = (operator, number1, number2) => {
         switch (operator) {
@@ -27,6 +33,9 @@ function verify(operation, operator) {
         number1 = Number(operation[position - 1]);
         number2 = Number(operation[position + 1]);
         result = operate(operator, number1, number2);
+        if(result == null) {
+            return 1;
+        }
 
         operation[position - 1] = result;
         operation.splice(position + 1, 1);
@@ -34,6 +43,7 @@ function verify(operation, operator) {
 
         position = operation.indexOf(operator);
     }
+    return 0;
 }
 
 let doOperation = document.querySelector('.equals'),
@@ -44,7 +54,8 @@ let doOperation = document.querySelector('.equals'),
 
 let display = document.querySelector('.display'),
     expression = document.querySelector('.expression'),
-    result = document.querySelector('.result');
+    result = document.querySelector('.result')
+    zeroError = false;
 
 allClear.addEventListener('click', () => {
     expression.innerHTML = '';
@@ -74,10 +85,17 @@ operators.forEach(element => {
 
 doOperation.addEventListener('click', () => { 
     let operation = expression.innerHTML.split(' ');
+
     verify(operation, '%');
     verify(operation, '/');
     verify(operation, 'x');
     verify(operation, '+');
     verify(operation, '-');
-    result.innerHTML = operation[0];
+    
+    if(zeroError) {
+        result.innerHTML = 'Division by zero.';
+        expression.innerHTML = '';
+        zeroError = false;
+    }else
+        result.innerHTML = operation[0];
 });
